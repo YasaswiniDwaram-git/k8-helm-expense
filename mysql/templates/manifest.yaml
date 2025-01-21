@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: yashdwar/mysql:v2
+        image: yashdwar/mysql:{{ .Values.deployment.imageVersion}}
 ---
 kind: Service
 apiVersion: v1
