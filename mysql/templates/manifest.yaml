@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: expense
+  labels:
+    tier: db
+    component: mysql
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: db
+      component: mysql
+  template:
+    metadata:
+      labels:
+        tier: db
+        component: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: yashdwar/mysql:v2
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql
+  namespace: expense
+spec:
+  selector:
+    tier: db
+    component: mysql
+  ports:
+  - name: mysql-port
+    protocol: TCP
+    port: 3306 # service port
+    targetPort: 3306 # container port
+      
+
