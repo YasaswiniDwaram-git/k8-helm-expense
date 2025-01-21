@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend
+  namespace: expense
+spec:
+  selector:
+    tier: backend
+    project: expense
+  ports:
+  - name: backend
+    protocol: TCP
+    port: 8080 # service port
+    targetPort: {{ .Values.service.targetPort}} # container port
