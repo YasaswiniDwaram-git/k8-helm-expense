@@ -1,0 +1,7 @@
+deployment:
+  imageVersion: v1
+service:
+  targetPort: 8080
+  type: LoadBalancer
+hpa:
+  name: frontend

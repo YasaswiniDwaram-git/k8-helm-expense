@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: joindevops/frontend:v1
+          image: joindevops/frontend:{{ .Values.deployment.imageVersion}}
           resources:
             requests:
               cpu: 100m
@@ -31,28 +31,28 @@ spec:
             limits:
               cpu: 100m
               memory: 128Mi
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: frontend
-  namespace: expense
-spec:
-  type: LoadBalancer
-  selector:
-      app: frontend
-      tier: web
-      project: expense
-  ports:
-  - name: frontend
-    protocol: TCP
-    port: 80 # service port
-    targetPort: 80 # container port
+# ---
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   name: frontend
+#   namespace: expense
+# spec:
+#   type: LoadBalancer
+#   selector:
+#       app: frontend
+#       tier: web
+#       project: expense
+#   ports:
+#   - name: frontend
+#     protocol: TCP
+#     port: 80 # service port
+#     targetPort: 80 # container port
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: frontend
+  name: {{ .Values.hpa.name}}
   namespace: expense
 spec:
   scaleTargetRef:
