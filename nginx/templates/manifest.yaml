@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  labels:
+    tier: api
+    project: deploy
+spec:
+  replicas: {{ .Values.deployment.replicas}}
+  selector:
+    matchLabels:
+      tier: api
+      project: deploy
+  template:
+    metadata:
+      labels:
+        tier: api
+        project: deploy
+        domain: dev
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:{{ .Values.deployment.image}}
+
+      
+
