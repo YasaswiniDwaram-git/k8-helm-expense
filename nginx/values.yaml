@@ -1,6 +1,6 @@
 deployment:
-  replicas: 3
-  image: latest
+  replicas: 5
+  image: stable-perl
 service:
   name: nginx-from-values
   type: LoadBalancer
